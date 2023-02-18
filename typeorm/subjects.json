@@ -1,0 +1,583 @@
+[
+  {
+    "id": 1,
+    "name": "Ingeniería en Sistemas de Información",
+    "years": [
+      {
+        "year": "Primer año",
+        "quarters": [
+          {
+            "quarter": "Primer cuatrimestre",
+            "subjects": [
+              {
+                "id": 1,
+                "name": "Álgebra y Lógica Computacional",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 2,
+                "name": "Introducción a la Informática",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 3,
+                "name": "Química General",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 4,
+                "name": "Sistemas y Organizaciones",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 5,
+                "name": "Inglés",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              }
+            ]
+          },
+          {
+            "quarter": "Segundo cuatrimestre",
+            "subjects": [
+              {
+                "id": 6,
+                "name": "Análisis Matemático I",
+                "correlatives": [1],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 7,
+                "name": "Arquitectura de Computadoras",
+                "correlatives": [1, 2],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 8,
+                "name": "Programación Estructurada",
+                "correlatives": [1, 2],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 9,
+                "name": "Matemática Discreta",
+                "correlatives": [1],
+                "Org": "Cuatrimestral"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "year": "Segundo Año",
+        "quarters": [
+          {
+            "quarter": "Primer cuatrimestre",
+            "subjects": [
+              {
+                "id": 10,
+                "name": "Análisis Matemático II",
+                "correlatives": [6],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 11,
+                "name": "Físca I",
+                "correlatives": [3, 6],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 12,
+                "name": "Paradigmas y Lenguajes de Programación I",
+                "correlatives": [8, 9],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 13,
+                "name": "Ingeniería de Software I",
+                "correlatives": [4, 8],
+                "Org": "Cuatrimestral"
+              }
+            ]
+          },
+          {
+            "quarter": "Segundo cuatrimestre",
+            "subjects": [
+              {
+                "id": 14,
+                "name": "Sistemas de Representación",
+                "correlatives": [1, 2],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 15,
+                "name": "Portugués",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 16,
+                "name": "Física II",
+                "correlatives": [10, 11],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 17,
+                "name": "Paradigmas y Lenguajes de Programación II",
+                "correlatives": [12],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 18,
+                "name": "Sistemas Operativos",
+                "correlatives": [7],
+                "Org": "Cuatrimestral"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "year": "Tercer Año",
+        "quarters": [
+          {
+            "quarter": "Primer cuatrimestre",
+            "subjects": [
+              {
+                "quarter": "Primer cuatrimestre",
+                "subjects": [
+                  {
+                    "id": 19,
+                    "name": "Probabilidad y Estadística",
+                    "correlatives": [9, 10],
+                    "Org": "Cuatrimestral"
+                  },
+                  {
+                    "id": 20,
+                    "name": "Análisis Numérico",
+                    "correlatives": [10],
+                    "Org": "Cuatrimestral"
+                  },
+                  {
+                    "id": 21,
+                    "name": "Comunicaciones",
+                    "correlatives": [10, 16, 18],
+                    "Org": "Cuatrimestral"
+                  },
+                  {
+                    "id": 22,
+                    "name": "Ingeniería de Software II",
+                    "correlatives": [13],
+                    "Org": "Cuatrimestral"
+                  },
+                  {
+                    "id": 23,
+                    "name": "Economía y Costos",
+                    "correlatives": [4],
+                    "Org": "Cuatrimestral"
+                  }
+                ]
+              },
+              {
+                "quarter": "Segundo cuatrimestre",
+                "subjects": [
+                  {
+                    "id": 24,
+                    "name": "Paradigmas y Lenguajes de Programación III",
+                    "correlatives": [17, 18],
+                    "Org": "Cuatrimestral"
+                  },
+                  {
+                    "id": 25,
+                    "name": "Investigación Operativa",
+                    "correlatives": [9, 10],
+                    "Org": "Cuatrimestral"
+                  },
+                  {
+                    "id": 26,
+                    "name": "Redes de Datos",
+                    "correlatives": [21],
+                    "Org": "Cuatrimestral"
+                  },
+                  {
+                    "id": 27,
+                    "name": "Gestión de Empresas",
+                    "correlatives": [23],
+                    "Org": "Cuatrimestral"
+                  },
+                  {
+                    "id": 28,
+                    "name": "Bases de Datos",
+                    "correlatives": [17, 22],
+                    "Org": "Cuatrimestral"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "year": "Cuarto Año",
+        "quarters": [
+          {
+            "quarter": "Primer cuatrimestre",
+            "subjects": [
+              {
+                "id": 29,
+                "name": "Modelo y Simulación",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 30,
+                "name": "Ingeniería de Software III",
+                "correlatives": [],
+                "Org": ""
+              },
+              {
+                "id": 31,
+                "name": "Teoría de Computación",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 32,
+                "name": "Desarrollo Multimedia",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 33,
+                "name": "Tecnología, Ciencia y Responsabilidad Social",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              }
+            ]
+          },
+          {
+            "quarter": "Segundo cuatrimestre",
+            "subjects": [
+              {
+                "id": 34,
+                "name": "Formulación y Evaluación de Proyectos",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 35,
+                "name": "Gestión Avanzada de Base de Datos",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 36,
+                "name": "Diseño y Desarrollo de Videojuegos",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 37,
+                "name": "Auditoría y Seguridad de la Información",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 38,
+                "name": "Sistemas Operativos Distribuidos",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "year": "Quinto Año",
+        "quarters": [
+          {
+            "quarter": "Primer cuatrimestre",
+            "subjects": [
+              {
+                "id": 39,
+                "name": "Tópicos Avanzados de Redes de Datos y Servicios",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 40,
+                "name": "Gestión de Proyectos",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 41,
+                "name": "Sistemas Inteligentes",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 42,
+                "name": "Práctica Profesional Supervisada I",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 43,
+                "name": "Planificación de Sistemas de Información para Negocios",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              }
+            ]
+          },
+          {
+            "quarter": "Segundo cuatrimestre",
+            "subjects": [
+              {
+                "id": 44,
+                "name": "Sistemas de Información Geográfica",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 45,
+                "name": "Derecho y Ética Profesional",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 46,
+                "name": "Práctica Profesional Supervisada II",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 47,
+                "name": "Proyecto Final de Grado",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Licenciatura en Psicología",
+    "years": [
+      {
+        "year": "Primer año",
+        "quarters": [
+          {
+            "quarter": "Primer cuatrimestre",
+            "subjects": [
+              {
+                "id": 1,
+                "name": "Psicología General I",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 2,
+                "name": "Fundamentos de Filosofía",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 3,
+                "name": "Informática",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 4,
+                "name": "Neurociencias I",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 5,
+                "name": "Inglés",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              }
+            ]
+          },
+          {
+            "quarter": "Segundo cuatrimestre",
+            "subjects": [
+              {
+                "id": 6,
+                "name": "Psicología General II",
+                "correlatives": [1],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 7,
+                "name": "Problemáticas Sociales Contemporáneas",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 8,
+                "name": "Antropología Cultural",
+                "correlatives": [2],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 9,
+                "name": "Portugués",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "year": "Segundo año",
+        "quarters": [
+          {
+            "quarter": "Primer cuatrimestre",
+            "subjects": [
+              {
+                "id": 10,
+                "name": "Psicología Evolutiva Niñez",
+                "correlatives": [6],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 11,
+                "name": "Neurociencias II",
+                "correlatives": [4],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 12,
+                "name": "Teoría Picoanalítica I",
+                "correlatives": [6],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 13,
+                "name": "Sociología",
+                "correlatives": [8],
+                "Org": "Cuatrimestral"
+              }
+            ]
+          },
+          {
+            "quarter": "Segundo cuatrimestre",
+            "subjects": [
+              {
+                "id": 14,
+                "name": "Teoría Picoanalítica II",
+                "correlatives": [12],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 15,
+                "name": "Salud Pública - Salud Mental",
+                "correlatives": [13],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 16,
+                "name": "Psicología Evolutiva Adolescencia",
+                "correlatives": [10],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 17,
+                "name": "Psicoestadística",
+                "correlatives": [],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 18,
+                "name": "Comunicación y Lenguaje",
+                "correlatives": [2, 6],
+                "Org": "Cuatrimestral"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "year": "Tercer año",
+        "quarters": [
+          {
+            "quarter": "Primer cuatrimestre",
+            "subjects": [
+              {
+                "id": 19,
+                "name": "Psicología Evolutiva Adulto Vejez",
+                "correlatives": [16],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 20,
+                "name": "Psicopatología",
+                "correlatives": [14, 18],
+                "Org": "Anual"
+              },
+              {
+                "id": 21,
+                "name": "Psicología Social Familia y Sistemas",
+                "correlatives": [15, 18],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 22,
+                "name": "Metodología de la investigación",
+                "correlatives": [17],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 23,
+                "name": "Historia Epistemológica de la Psicología",
+                "correlatives": [2],
+                "Org": "Cuatrimestral"
+              }
+            ]
+          },
+          {
+            "quarter": "Segundo cuatrimestre",
+            "subjects": [
+              {
+                "id": 20.1,
+                "name": "Psicopatología",
+                "correlatives": [14, 18],
+                "Org": "Anual"
+              },
+              {
+                "id": 24,
+                "name": "Teoría y Técnica de Grupo",
+                "correlatives": [21],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 25,
+                "name": "Práctica de Investigación Psicosocial",
+                "correlatives": [15, 22],
+                "Org": "Cuatrimestral"
+              },
+              {
+                "id": 26,
+                "name": "Ética, Deontología Profesional y Derechos Humanos",
+                "correlatives": [7, 15, 23],
+                "Org": "Cuatrimestral"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
