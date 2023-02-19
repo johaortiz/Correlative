@@ -1,46 +1,47 @@
-import { AppDataSource } from '../data-source'
-import { NextFunction, Request, Response } from "express"
-import { Carrer } from '../entity/Career'
+import { AppDataSource } from '../data-source';
+import { NextFunction, Request, Response } from "express";
+import { Career } from '../entity/Career';
 
-export class Career {
-    private careerRepository = AppDataSource.getRepository(Carrer);
+export class CareerController {
+    private careerRepository = AppDataSource.getRepository(Career);
 
     async all(_request: Request, _response: Response, _next: NextFunction) {
-        return this.careerRepository.find()
+        return this.careerRepository.find({ relations: ["subjects"] });
     };
 
     async oneById(_request: Request, _response: Response, _next: NextFunction) {
-        const id = parseInt(_request.params.id)
-
+        const id = parseInt(_request.params.id);
 
         const career = await this.careerRepository.findOne({
             where: { id }
-        })
+        });
 
         if (!career) {
-            return ("unregistered user");
-        }
-        return career
-    }
+            return ("Career not found");
+        };
+        return career;
+    };
 
     async oneByName(_request: Request, _response: Response, _next: NextFunction) {
         const { name } = _request.params;
 
         const career = await this.careerRepository.findOne({
             where: name
-        })
+        });
 
         if (!career) {
-            return ("unregistered user");
-        }
-        return career
-    }
+            return ("Career not found");
+        };
+        return career;
+    };
 
     async save(_request: Request, _response: Response, _next: NextFunction) {
         const { name, semesters } = _request.body;
-
-
-
+        const career = Object.assign(new Career(), {
+            name,
+            semesters
+        });
+        return this.careerRepository.save(career);
     };
 
 };

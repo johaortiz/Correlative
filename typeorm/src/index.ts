@@ -6,6 +6,7 @@ import { Routes } from "./routes";
 import { config } from "dotenv";
 
 const { PORT } = config().parsed;
+const port: string | number = PORT || 3002;
 
 
 AppDataSource.initialize().then(async () => {
@@ -29,7 +30,6 @@ AppDataSource.initialize().then(async () => {
             }
         })
     })
-    const port: string | number = PORT || 3002;
     app.use(handleError);
     app.listen(port)
 

@@ -1,7 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Career } from "./Career";
 
 @Entity()
-export class Carrer {
+export class Subject {
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -18,6 +19,10 @@ export class Carrer {
     @Column()
     org: string;
 
-    @Column()
+    @Column("int", { array: true, default: [] })
     correlatives: number[];
+
+    @ManyToOne(type => Career, career => career.subjects)
+    career: Career;
+
 };
