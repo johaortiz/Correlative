@@ -4,11 +4,11 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 export class Carrer {
 
     @PrimaryGeneratedColumn()
-    id: number
+    id: number;
 
     @Column()
-    name: string
+    name: string;
 
     @Column()
-    semesters: number
+    semesters: number;
 };

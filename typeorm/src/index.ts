@@ -3,6 +3,10 @@ import * as bodyParser from "body-parser";
 import { Request, Response } from "express";
 import { AppDataSource } from "./data-source";
 import { Routes } from "./routes";
+import { config } from "dotenv";
+
+const { PORT } = config().parsed;
+
 
 AppDataSource.initialize().then(async () => {
 
@@ -25,11 +29,11 @@ AppDataSource.initialize().then(async () => {
             }
         })
     })
-
+    const port: string | number = PORT || 3002;
     app.use(handleError);
-    app.listen(3000)
+    app.listen(port)
 
 
-    console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results")
+    console.log(`Express server has started on port ${PORT}.`)
 
 }).catch(error => console.log(error))

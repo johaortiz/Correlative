@@ -8,7 +8,7 @@ export class User {
 
     @Column()
     @Index({ unique: true })
-    email: string;
+    hashedEmail: string;
 
     @Column()
     @Index({ unique: true })

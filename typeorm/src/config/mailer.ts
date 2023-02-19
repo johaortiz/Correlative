@@ -1,6 +1,9 @@
 import { createTransport } from "nodemailer";
+import { config } from "dotenv";
 
-const transporter = createTransport({
+const { GOOGLE_EMAIL, GOOGLE_PASS } = config().parsed;
+
+let transporter = createTransport({
     host: "smtp.gmail.com",
     port: 465,
     tls: {
@@ -8,27 +11,28 @@ const transporter = createTransport({
     },
     secure: true, // true for 465, false for other ports
     auth: {
-        user: "correlativaucp@gmail.com", // generated ethereal user
-        pass: "ungdskczwpttlxhf", // generated ethereal password
+        user: GOOGLE_EMAIL, // generated ethereal user
+        pass: GOOGLE_PASS, // generated ethereal password
     }
 });
 
-export const sendEmail = async (email: string, subject: string) => {
+export const sendEmail = async (email: string, hashedEmail: string) => {
     try {
-        await transporter.sendEmail({
+        await transporter.sendMail({
             from: `UCP Correlativas`,
             to: email,
-            subject,
+            subject: "Confirmá tu Cuenta",
             html: `<h3>Bienvenido a UCP Correlativas</h3>
-            <p>¡Muchas gracias por registrase!</p>
-            <p>Por favor, confirme su correo electrónico para poder empezar a utilizar la plataforma</p>
-            <a href="localhost:3000/user/validate/${email}">Haz click aquí para confirmar!</a>
-            <p>Reuerda que no somos un sitio oficial ni autorizado por la Universidad Cuenca del Plata y que 
-            este sitio está hecha por un estudiante (yo) para usarlo el mismo y lo comparte con los demás alumnos</p>
-            <p>Saludos!</p>
-            `
-        })
+                <p>¡Muchas gracias por registrate!</p>
+                <p>Por favor, confirme su correo electrónico para poder empezar a utilizar la plataforma</p>
+                <a href="http://localhost:3000/user/validate?account=${hashedEmail}">Haz click aquí para confirmar!</a>
+                <p>Reuerda que UCP Correlativas <strong>no</strong> es un sitio oficial ni autorizado por la Universidad Cuenca del Plata y que 
+                este sitio está hecha por un estudiante (yo) para usarlo él mismo y lo comparte con los demás alumnos</p>
+                <p>Saludos!</p>
+                `
+        });
+        return "All Ok";
     } catch (error) {
-        throw new Error(error);
+        throw Error(error);
     }
 };
