@@ -1,35 +1,39 @@
+import axios from "axios";
+import FormAcess from "../../components/FormAcces";
+
 const Login = () => {
+    const login = {
+        forgot: true,
+        type: "login",
+        title: "Acceda Ahora",
+        subTitle: "¡Que bueno verte de nuevo!",
+        btnText: "Acceder",
+        formControl: [
+            {
+                labelText: "Nombre de Usuario",
+                placeholderText: "nombre de usuario",
+                typeInput: "text",
+                value: "name"
+            }, {
+                labelText: "Contraseña",
+                placeholderText: "contraseña",
+                typeInput: "password",
+                value: "password"
+            }
+        ],
+        functionForm: () => {
+            axios.get(`http://localhost:3000/users`)
+                .then((res) => {
+                    return res.data;
+                })
+                .catch((error) => {
+                    return error;
+                })
+        }
+    };
+    const { forgot, title, subTitle, btnText, formControl, functionForm } = login;
     return (
-        <div className="hero min-h-screen bg-base-200">
-            <div className="hero-content flex-col lg:flex-row-reverse">
-                <div className="text-center lg:text-left">
-                    <h1 className="text-5xl font-bold">Login now!</h1>
-                    <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-                </div>
-                <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                    <div className="card-body">
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">User Name</span>
-                            </label>
-                            <input type="text" placeholder="user name" className="input input-bordered" />
-                        </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Password</span>
-                            </label>
-                            <input type="text" placeholder="password" className="input input-bordered" />
-                            <label className="label">
-                                <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                            </label>
-                        </div>
-                        <div className="form-control mt-6">
-                            <button className="btn btn-primary">Login</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <FormAcess forgot={forgot} title={title} subTitle={subTitle} btnText={btnText} formControl={formControl} functionForm={functionForm} />
     );
 };
 export default Login;

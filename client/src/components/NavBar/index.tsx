@@ -20,8 +20,7 @@ const NavBar = () => {
                 </div>
                 <div className="flex-none navbar-end">
                     <ul className="menu menu-horizontal px-1">
-                        <li><a>Sobre Mi</a></li>
-                        <li><Link to="/login">Login</Link></li>
+                        <li><Link to="#">Sobre Mi</Link></li>
                     </ul>
                 </div>
             </div>
