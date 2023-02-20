@@ -6,7 +6,7 @@ export class CareerController {
     private careerRepository = AppDataSource.getRepository(Career);
 
     async all(_request: Request, _response: Response, _next: NextFunction) {
-        return this.careerRepository.find({ relations: ["subjects"] });
+        return this.careerRepository.find();
     };
 
     async oneById(_request: Request, _response: Response, _next: NextFunction) {

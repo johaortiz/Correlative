@@ -50,13 +50,13 @@ export class UserController {
 
     //Register a User
     async save(_request: Request, _response: Response, _next: NextFunction) {
-        const { username, password, email, carrerId } = _request.body;
+        const { username, password, email, carrerName } = _request.body;
         const salt: string = await genSalt(10);
         const hashedPassword: string = await hash(password, salt);
         const hashedEmail: string = await hash(email, salt);
         const findUser = await axios.get(`http://localhost:3000/users/findName/${username}`);
         const career = await this.careerRepository.findOne({
-            where: { id: carrerId }
+            where: { name: carrerName }
         });
 
         if (findUser.data !== "unregistered user") {
@@ -72,7 +72,7 @@ export class UserController {
             });
             this.userRepository.save(user);
             await sendEmail(email, hashedEmail);
-            return "Successfully registered user";
+            return "Usuario creado correctamente! Por favor, revise su correo";
         } catch (error) {
             throw new Error(error);
         };
@@ -83,21 +83,19 @@ export class UserController {
         const { username, password } = _request.body;
         const user = await axios.get(`http://localhost:3000/users/findName/${username}`);
         if (user.data === "unregistered user") {
-            throw new Error("unregistered user");
+            throw new Error("Usuario no Encontrado");
         };
         const passwordCheck: boolean = await compare(password, user.data.hashedPassword);
-        const { id, username: userDataBase, hashedPassword, aprobedSubjects, regularizatedSubjects } = user.data;
+        const { username: userDataBase, aprobedSubjects, regularizatedSubjects } = user.data;
         if (passwordCheck) {
             const token = sign({
-                id,
                 username: userDataBase,
-                hashedPassword,
                 aprobedSubjects,
                 regularizatedSubjects
             }, TOKEN_KEY);
-            return token;
+            return { token: token };
         };
-        throw new Error("wrong password");
+        throw new Error("Contraseña Incorrecta");
     };
 
     //Delete an User

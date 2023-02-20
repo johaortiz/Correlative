@@ -1,7 +1,7 @@
-import { useState, ChangeEvent, FormEvent } from "react";
-import ComboBox from "react-combo-box-nato";
-import { Link } from "react-router-dom"
-import FormControl from "../FormControl"
+import { useState, ChangeEvent, FormEvent, useRef } from "react";
+import FormControl from "../FormControl";
+import Cookies from 'js-cookie';
+import { redirect, useNavigate } from "react-router-dom";
 
 interface FormControl {
     labelText: string,
@@ -10,86 +10,74 @@ interface FormControl {
     value: string
 };
 
-type FormValues = {
-    [key: string]: string | undefined
-};
 
-const FormAcess = (props: { title: string, subTitle: string, btnText: string, formControl: FormControl[], forgot?: boolean, functionForm: Function }) => {
+const FormAcess = (props: { title: string, subTitle: string, btnText: string, formControl: FormControl[], forgot?: boolean, functionForm: Function, aditional?: any }) => {
 
+    //Values
+    const ref = useRef<any>(null);
+    const [error, setError] = useState("");
 
-    const initialState: FormValues = props.formControl.reduce(
-        (acc, { value }) => ({ ...acc, [value]: "" }),
-        {}
-    );
-    const [values, setValues] = useState<{ [key: string]: any }>(initialState);
+    //Change Path
+    const navigate = useNavigate();
 
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        return setValues({ ...values, [event.target.name]: event.target.value });
-    };
-
+    //Send data
     const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const a = await props.functionForm(values);
-        console.log(a);
+        //ALL values
+        const valuesRef = Object.values(ref.current.elements).map((e: any) => {
+            return (e.value);
+        })
+        const a = await props.functionForm(valuesRef);
+        //Login part
+        if (a.token) {
+            Cookies.set('token', a.token, { expires: .5, sameSite: "strict" });
+            return navigate("/");
+        };
+        //Errors Controller
+        setError(a);
+        setTimeout(() => setError(""), 7000);
+        //Register part
+        if (a === "Usuario creado correctamente! Por favor, revise su correo(Si no lo encuentra, busque en correo no deseado)") {
+            return ref.current.reset();
+
+        };
     };
-    const options = [
-        "America",
-        "India",
-        "Australia",
-        "Argentina",
-        "Ireland",
-        "Indonesia",
-        "Iceland",
-        "Japan",
-        "China",
-        "Afghanistan",
-        "Albania",
-        "Algeria",
-        "Andorra",
-        "Angola",
-        "Antigua",
-        "Barbuda",
-        "Mexico",
-        "Monaco",
-        "Nepal",
-        "Bulgaria",
-        "Pakistan",
-        "Russia",
-        "Egypt",
-        "Sri Lanka",
-        "Singapore"
-    ];
+
     return (
-        <form onSubmit={onSubmit} className="hero min-h-screen bg-base-200">
-            <div className="hero-content flex-col lg:flex-row-reverse">
-                <div className="text-center lg:text-right">
-                    <h1 className="text-5xl font-bold">{props.title}</h1>
-                    <p className="py-6">{props.subTitle}</p>
+        <>
+            <div className={`alert shadow-lg mt-5 z-10 absolute ${error === "Usuario creado correctamente! Por favor, revise su correo" ? "alert-success" : "alert-error"} ${!error && "hidden"}`}>
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>{error}</span>
                 </div>
-                <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                    <div className="card-body">
-                        {
-                            props.formControl.map((form, i) => {
-                                return <FormControl key={i} labelText={form.labelText} placeholderText={form.placeholderText} typeInput={form.typeInput} name={form.value} value={values[form.value]} handleChange={handleChange} />
-                            })
-                        }
-                        <ComboBox
-                            options={options} enableAutocomplete
-                        />
-                        {
-                            (props.forgot || false) && (
-                                <label className="label">
-                                    <Link to="#" className="label-text-alt link link-hover">¿Olvidó su contraseña? Recupérela</Link>
-                                </label>
-                            )
-                        }
-                        <div className="form-control mt-6">
-                            <button className="btn btn-primary">{props.btnText}</button>
+            </div>
+            <form ref={ref} onSubmit={onSubmit} className="hero bg-base-200 mt-20">
+                <div className="hero-content flex-col lg:flex-row-reverse">
+                    <div className="text-center lg:text-right">
+                        <h1 className="text-5xl font-bold">{props.title}</h1>
+                        <p className="py-6">{props.subTitle}</p>
+                    </div>
+
+                    <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+                        <div className="card-body">
+                            {
+                                props.formControl.map((form, i) => {
+                                    return <FormControl key={i} labelText={form.labelText} placeholderText={form.placeholderText} typeInput={form.typeInput} name={form.value} />
+                                })
+                            }
+                            {
+                                props.aditional
+                            }
+                            <div className="form-control mt-6">
+                                <button className="btn btn-primary">{props.btnText}</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </>
     )
 }
 export default FormAcess

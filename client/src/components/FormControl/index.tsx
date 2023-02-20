@@ -1,4 +1,4 @@
-const FormControl = (props: { labelText: string, placeholderText: string, typeInput: string, name: string, value: string, handleChange: Function }) => {
+const FormControl = (props: { labelText: string, placeholderText: string, typeInput: string, name: string }) => {
 
 
     return (
@@ -6,7 +6,7 @@ const FormControl = (props: { labelText: string, placeholderText: string, typeIn
             <label className="label">
                 <span className="label-text">{props.labelText}</span>
             </label>
-            <input name={props.name} value={props.value} onChange={(e) => props.handleChange(e)} type={props.typeInput} placeholder={props.placeholderText} className="input input-bordered" />
+            <input name={props.name} type={props.typeInput} placeholder={props.placeholderText} className="input input-bordered" />
         </div>
     );
 };

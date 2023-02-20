@@ -1,5 +1,6 @@
-import axios from "axios";
+import { Link } from "react-router-dom";
 import FormAcess from "../../components/FormAcces";
+import { loginUser, saveUser } from "../../helpers/requests";
 
 const Login = () => {
     const login = {
@@ -21,19 +22,16 @@ const Login = () => {
                 value: "password"
             }
         ],
-        functionForm: () => {
-            axios.get(`http://localhost:3000/users`)
-                .then((res) => {
-                    return res.data;
-                })
-                .catch((error) => {
-                    return error;
-                })
-        }
+        functionForm: async (data: any) => {
+            return await loginUser(data);
+        },
+        aditional: <label className="label">
+            <Link to="#" className="label-text-alt link link-hover">¿Olvidó su contraseña? Recupérela</Link>
+        </label>
     };
-    const { forgot, title, subTitle, btnText, formControl, functionForm } = login;
+    const { forgot, title, subTitle, btnText, formControl, functionForm, aditional } = login;
     return (
-        <FormAcess forgot={forgot} title={title} subTitle={subTitle} btnText={btnText} formControl={formControl} functionForm={functionForm} />
+        <FormAcess forgot={forgot} title={title} subTitle={subTitle} btnText={btnText} formControl={formControl} functionForm={functionForm} aditional={aditional} />
     );
 };
 export default Login;
