@@ -1,27 +1,45 @@
-import SideBar from "../../components/SideBar.tsx";
-import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
+import { decodeToken } from "react-jwt";
+import Logout from "../../components/Logout";
+import { subjectsWhitIdCareer } from "../../helpers/requests";
+import HomeWOT from "./HomeWhitoutToken";
+import HomeWT from "./HomeWhitToken";
 
 const Home = () => {
-    return (
-        <div className="bg-base-200 flex h-screen">
-            {/* <SideBar /> */}
-            <div className="flex-1 flex justify-center mt-10">
-                <div className="card w-[80vw] h-fit bg-base-100 shadow-xl">
-                    <div className="card-body justify-center items-center text-justify">
-                        <h1 className="text-5xl font-bold">Bienvenido!</h1>
-                        <p className="py-6">UCP Correlativas es herramienta web <strong>NO</strong> oficial de la Univerdidad de la Cuenca del Plata para poder llevar el control de si en tu situación podés cursar, promocionar o regularizar alguna materia</p>
-                        <p className="pb-6">Para continuar, tendrá que registrarse o iniciar sesión</p>
-                        <div className="flex">
-                            <Link to="/acceso"><button className="btn btn-primary mx-2">Iniciar Sesión</button></Link>
-                            <Link to="/registro"><button className="btn btn-primary mx-2">Registrarse</button></Link>
-                        </div>
-                        <p className="py-6 text-xs">
-                            No se solicitan datos del estudiante, se pide registro únicamente para que usted lleve control de su situación, tampoco comprobamos si usted pertenece o no a la universidad.
-                            No se recomienda usar su contraseña de la universidad, ya que no se solicitan datos de la misma.
-                        </p>
-                    </div>
+
+    const token: string = Cookies.get("token") || "";
+    const account: any = decodeToken(token);
+
+    if (account?.isActive === false) {
+        return <div className="alert alert-warning shadow-lg">
+            <div className="flex flex-col">
+                <div className="flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    <span>Por favor, activá tu cuenta en tu casilla de correo, si no lo encuentra revise el SPAM {`(correo no deseado)`} o comunícate conmigo.</span>
                 </div>
+                <p className="text-sm"><strong>Si ya activaste tu cuenta, por favor, vovlé a iniciar sesión.</strong></p>
+                <button className="btn btn-accent"><Logout /></button>
             </div>
+        </div>
+    };
+
+    const [subjects, setSubjects] = useState([]);
+    useEffect(() => {
+        if (typeof account?.careerId === "number") {
+            subjectsWhitIdCareer(account.careerId).then(res => setSubjects(res));
+        };
+    }, []);
+
+
+    return (
+        <div className="bg-base-200 flex justify-center items-center mt-10">
+            {/* <SideBar /> */}
+            {
+                account ? <HomeWT subjects={subjects} /> : <HomeWOT />
+            }
         </div>
 
     );

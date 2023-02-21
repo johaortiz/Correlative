@@ -2,12 +2,16 @@ import { AppDataSource } from '../data-source';
 import { NextFunction, Request, Response } from "express";
 import { Subject } from "../entity/Subject";
 import { Career } from '../entity/Career';
+import { User } from '../entity/User';
+import { UserSubject } from '../entity/UserSubject';
 
 
 export class SubjectController {
 
     private subjectRepository = AppDataSource.getRepository(Subject);
+    private userRepository = AppDataSource.getRepository(User);
     private careerRepository = AppDataSource.getRepository(Career);
+    private userSubjectRepository = AppDataSource.getRepository(UserSubject);
 
     async all(_request: Request, _response: Response, _next: NextFunction) {
         return this.subjectRepository.find({ relations: ["career"] });
@@ -42,21 +46,32 @@ export class SubjectController {
     async save(_request: Request, _response: Response, _next: NextFunction) {
         const { idFromUniversity, name, semester, org, correlatives, careerId } = _request.body;
 
-        const career = await this.careerRepository.findOne({
-            where: { id: careerId }
+        const careerSelected = await this.careerRepository.findOne({
+            where: { id: careerId },
+            relations: ["users"]
         });
 
-        const subject = Object.assign(new Subject, {
+        const subjectDb = Object.assign(new Subject, {
             idFromUniversity,
             name,
             semester,
             org,
             correlatives,
-            career
+            career: careerSelected
         });
 
-        return this.subjectRepository.save(subject);
+        await this.subjectRepository.save(subjectDb);
 
+        const userSubjects = careerSelected.users.map(user => {
+            const userSubject = new UserSubject();
+            userSubject.user = user;
+            userSubject.subject = subjectDb;
+            return userSubject;
+        });
+
+        await this.userSubjectRepository.save(userSubjects);
+
+        return subjectDb;
     };
 
 };

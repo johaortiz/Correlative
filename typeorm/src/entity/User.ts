@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, Index, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from "typeorm";
 import { Career } from "./Career";
+import { UserSubject } from "./UserSubject";
 
 @Entity()
 export class User {
@@ -8,26 +9,21 @@ export class User {
     id: number;
 
     @Column()
-    @Index({ unique: true })
     hashedEmail: string;
 
     @Column()
-    @Index({ unique: true })
     username: string;
 
     @Column()
     hashedPassword: string;
 
-    @Column("int", { array: true, default: [] })
-    aprobedSubjects: number[];
-
-    @Column("int", { array: true, default: [] })
-    regularizatedSubjects: number[];
-
-    @Column({ default: false })
+    @Column({ default: true })
     isActive: boolean;
 
-    @ManyToOne(type => Career, carrer => carrer.users)
+    @ManyToOne(type => Career, career => career.users)
     career: Career;
+
+    @OneToMany(() => UserSubject, userSubject => userSubject.user, { cascade: true })
+    subjects: UserSubject[];
 
 };

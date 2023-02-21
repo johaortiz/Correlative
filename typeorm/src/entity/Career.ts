@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable } from "typeorm";
 import { Subject } from "./Subject";
 import { User } from "./User";
 
@@ -19,4 +19,5 @@ export class Career {
 
     @OneToMany(type => User, user => user.career)
     users: User[];
+
 };

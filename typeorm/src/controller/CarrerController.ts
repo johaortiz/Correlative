@@ -6,6 +6,7 @@ export class CareerController {
     private careerRepository = AppDataSource.getRepository(Career);
 
     async all(_request: Request, _response: Response, _next: NextFunction) {
+
         return this.careerRepository.find();
     };
 
@@ -13,7 +14,8 @@ export class CareerController {
         const id = parseInt(_request.params.id);
 
         const career = await this.careerRepository.findOne({
-            where: { id }
+            where: { id },
+            relations: ["subjects"]
         });
 
         if (!career) {

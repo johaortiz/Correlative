@@ -56,19 +56,26 @@ export class UserController {
         const hashedEmail: string = await hash(email, salt);
         const findUser = await axios.get(`http://localhost:3000/users/findName/${username}`);
         const career = await this.careerRepository.findOne({
-            where: { name: carrerName }
+            where: { name: carrerName },
+            relations: ["subjects"]
         });
 
         if (findUser.data !== "unregistered user") {
             throw new Error("User alredy exist");
         };
-
+        if (!career) {
+            throw new Error(`La carrera ${carrerName} no existe`);
+        }
+        const subjects = career.subjects.map((subject) => {
+            return { subject, approved: false, regularized: false };
+        });
         try {
             const user: User = Object.assign(new User(), {
                 hashedEmail,
                 username,
                 hashedPassword,
-                career
+                career,
+                subjects
             });
             this.userRepository.save(user);
             await sendEmail(email, hashedEmail);
@@ -81,17 +88,23 @@ export class UserController {
     //Login of User
     async login(_request: Request, _response: Response, _next: NextFunction) {
         const { username, password } = _request.body;
-        const user = await axios.get(`http://localhost:3000/users/findName/${username}`);
-        if (user.data === "unregistered user") {
+        const user: User = await this.userRepository.findOne({
+            where: { username },
+            relations: ["career"]
+        });
+
+        if (!user) {
             throw new Error("Usuario no Encontrado");
         };
-        const passwordCheck: boolean = await compare(password, user.data.hashedPassword);
-        const { username: userDataBase, aprobedSubjects, regularizatedSubjects } = user.data;
+        const passwordCheck: boolean = await compare(password, user.hashedPassword);
+        const { username: userDataBase, subjects, career, isActive } = user;
+
         if (passwordCheck) {
             const token = sign({
                 username: userDataBase,
-                aprobedSubjects,
-                regularizatedSubjects
+                subjects,
+                careerId: career.id,
+                isActive
             }, TOKEN_KEY);
             return { token: token };
         };

@@ -24,6 +24,17 @@ export const saveUser = async (data: string[]) => {
 
 };
 
+//Get all subjects whit id of Career
+export const subjectsWhitIdCareer = async (id: number) => {
+    try {
+        const response = await axios.get(`http://localhost:3000/careers/findId/${id}`);
+        return response.data.subjects;
+    } catch (error: any) {
+        return (error.response.data.message);
+    }
+};
+
+
 //Login user
 export const loginUser = async (data: string[]) => {
     const [username, password] = data;
