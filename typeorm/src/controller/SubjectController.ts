@@ -62,16 +62,16 @@ export class SubjectController {
 
         await this.subjectRepository.save(subjectDb);
 
-        // const userSubjects = careerSelected.users.map(user => {
-        //     const userSubject = new UserSubject();
-        //     userSubject.user = user;
-        //     userSubject.subject = subjectDb;
-        //     return userSubject;
-        // });
+        const userSubjects = careerSelected.users.map(user => {
+            const userSubject = new UserSubject();
+            userSubject.user = user;
+            userSubject.subject = subjectDb;
+            return userSubject;
+        });
 
-        // await this.userSubjectRepository.save(userSubjects);
+        await this.userSubjectRepository.save(userSubjects);
 
-        // return subjectDb;
+        return subjectDb;
     };
 
 };
