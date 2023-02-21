@@ -2,14 +2,12 @@ import { AppDataSource } from '../data-source';
 import { NextFunction, Request, Response } from "express";
 import { Subject } from "../entity/Subject";
 import { Career } from '../entity/Career';
-import { User } from '../entity/User';
 import { UserSubject } from '../entity/UserSubject';
 
 
 export class SubjectController {
 
     private subjectRepository = AppDataSource.getRepository(Subject);
-    private userRepository = AppDataSource.getRepository(User);
     private careerRepository = AppDataSource.getRepository(Career);
     private userSubjectRepository = AppDataSource.getRepository(UserSubject);
 

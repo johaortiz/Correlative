@@ -1,6 +1,7 @@
 import { CareerController } from "./controller/CarrerController";
 import { SubjectController } from "./controller/SubjectController";
 import { UserController } from "./controller/UserController";
+import { UserSubjectController } from "./controller/UserSubjectController";
 
 export const Routes = [
     //User's Routes
@@ -101,5 +102,19 @@ export const Routes = [
         route: "/subjects/:id",
         controller: SubjectController,
         action: "remove"
-    }
+    },
+
+    //Table UserSubjects Route
+    {
+        method: "post",
+        route: "/usersubject",
+        controller: UserSubjectController,
+        action: "subjectsFromStudent"
+    }, {
+        method: "post",
+        route: "/usersubject/update",
+        controller: UserSubjectController,
+        action: "update"
+    },
+
 ];

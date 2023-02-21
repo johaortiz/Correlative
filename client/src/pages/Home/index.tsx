@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { decodeToken } from "react-jwt";
 import Logout from "../../components/Logout";
-import { subjectsWhitIdCareer } from "../../helpers/requests";
+import { subjectsWhitIdCareer, userSubject } from "../../helpers/requests";
 import HomeWOT from "./HomeWhitoutToken";
 import HomeWT from "./HomeWhitToken";
 
@@ -27,9 +27,13 @@ const Home = () => {
     };
 
     const [subjects, setSubjects] = useState([]);
+    const [userSubjects, setUserSubjects] = useState([]);
+
+
     useEffect(() => {
         if (typeof account?.careerId === "number") {
             subjectsWhitIdCareer(account.careerId).then(res => setSubjects(res));
+            userSubject(account.id).then(res => setUserSubjects(res));
         };
     }, []);
 
@@ -38,7 +42,7 @@ const Home = () => {
         <div className="bg-base-200 flex justify-center items-center mt-10">
             {/* <SideBar /> */}
             {
-                account ? <HomeWT subjects={subjects} /> : <HomeWOT />
+                account ? <HomeWT subjects={subjects} userSubjects={userSubjects} /> : <HomeWOT />
             }
         </div>
 

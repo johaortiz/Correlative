@@ -34,6 +34,15 @@ export const subjectsWhitIdCareer = async (id: number) => {
     }
 };
 
+//Get relation of subjects and user
+export const userSubject = async (id: number) => {
+    try {
+        const response = await axios.post(`http://localhost:3000/usersubject`, { userId: id });
+        return response.data;
+    } catch (error: any) {
+        return (error.response.data.message);
+    };
+};
 
 //Login user
 export const loginUser = async (data: string[]) => {
