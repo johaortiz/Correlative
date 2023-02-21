@@ -97,12 +97,11 @@ export class UserController {
             throw new Error("Usuario no Encontrado");
         };
         const passwordCheck: boolean = await compare(password, user.hashedPassword);
-        const { username: userDataBase, subjects, career, isActive } = user;
+        const { username: userDataBase, career, isActive } = user;
 
         if (passwordCheck) {
             const token = sign({
                 username: userDataBase,
-                subjects,
                 careerId: career.id,
                 isActive
             }, TOKEN_KEY);

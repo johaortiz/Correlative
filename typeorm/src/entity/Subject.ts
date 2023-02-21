@@ -28,10 +28,11 @@ export class Subject {
     career: Career;
 
     @ManyToMany(() => User, user => user.subjects)
-    @JoinTable()
+    @JoinTable({
+        name: "user_subject",
+        joinColumn: { name: "subject_id", referencedColumnName: "id" },
+        inverseJoinColumn: { name: "user_id", referencedColumnName: "id" }
+    })
     users: User[];
-
-    @OneToMany(type => UserSubject, userSubject => userSubject.subject, { cascade: true })
-    userSubjects: UserSubject[];
 
 };
