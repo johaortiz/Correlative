@@ -5,9 +5,9 @@ import * as cors from "cors";
 import { Request, Response } from "express";
 import { AppDataSource } from "./data-source";
 import { Routes } from "./routes";
-import { config } from "dotenv";
+require("dotenv").config();
 
-const { PORT } = config().parsed;
+const { PORT } = process.env;
 const port: string | number = PORT || 3002;
 
 
