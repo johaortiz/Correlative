@@ -7,6 +7,9 @@ import { config } from "dotenv";
 import { UserSubject } from "./entity/UserSubject";
 const { DATABASE_NAME, DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_PORT } = config().parsed;
 
+console.log(DATABASE_NAME, DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_PORT);
+
+
 
 export const AppDataSource = new DataSource({
     type: "postgres",
