@@ -1,7 +1,7 @@
 import { createTransport } from "nodemailer";
-import { config } from "dotenv";
+require("dotenv").config();
 
-const { GOOGLE_EMAIL, GOOGLE_PASS } = config().parsed;
+const { GOOGLE_EMAIL, GOOGLE_PASS } = process.env;
 
 let transporter = createTransport({
     host: "smtp.gmail.com",
