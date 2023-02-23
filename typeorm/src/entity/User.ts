@@ -17,7 +17,7 @@ export class User {
     @Column()
     hashedPassword: string;
 
-    @Column({ default: true })
+    @Column({ default: false })
     isActive: boolean;
 
     @ManyToOne(type => Career, career => career.users)
