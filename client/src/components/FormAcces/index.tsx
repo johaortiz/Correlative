@@ -1,7 +1,8 @@
 import { useState, ChangeEvent, FormEvent, useRef } from "react";
 import FormControl from "../FormControl";
 import Cookies from 'js-cookie';
-import { redirect, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+
 
 interface FormControl {
     labelText: string,
@@ -17,9 +18,6 @@ const FormAcess = (props: { title: string, subTitle: string, btnText: string, fo
     const ref = useRef<any>(null);
     const [error, setError] = useState("");
 
-    //Change Path
-    const navigate = useNavigate();
-
     //Send data
     const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -31,7 +29,7 @@ const FormAcess = (props: { title: string, subTitle: string, btnText: string, fo
         //Login part
         if (a.token) {
             Cookies.set('token', a.token, { expires: .5, sameSite: "strict" });
-            return navigate("/");
+            return window.location.replace("/");
         };
         //Errors Controller
         setError(a);
@@ -44,7 +42,7 @@ const FormAcess = (props: { title: string, subTitle: string, btnText: string, fo
     };
 
     return (
-        <>
+        <motion.div initial={{ width: 0 }} animate={{ width: "100vw" }} exit={{ width: window.innerWidth, transition: { duration: 0.1 } }}>
             <div className={`alert shadow-lg mt-5 z-10 absolute ${error === "Usuario creado correctamente! Por favor, revise su correo" ? "alert-success" : "alert-error"} ${!error && "hidden"}`}>
                 <div>
                     <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
@@ -77,7 +75,7 @@ const FormAcess = (props: { title: string, subTitle: string, btnText: string, fo
                     </div>
                 </div>
             </form>
-        </>
+        </motion.div>
     )
 }
 export default FormAcess

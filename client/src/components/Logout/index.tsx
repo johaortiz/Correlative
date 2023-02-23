@@ -1,14 +1,10 @@
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
 
 const Logout = () => {
-
-    const navigate = useNavigate();
-
     const logout = (e: any) => {
         e.preventDefault();
         Cookies.remove("token");
-        navigate("/login");
+        return window.location.replace("/");
     };
 
     return (

@@ -44,6 +44,16 @@ export const userSubject = async (id: number) => {
     };
 };
 
+//Update user_subject relation
+export const updateDbUserSubject = async (data: any) => {
+    try {
+        const response = await axios.post(`http://localhost:3000/usersubject/update`, { data });
+        return response.data;
+    } catch (error: any) {
+        return (error.response.data.message);
+    };
+};
+
 //Login user
 export const loginUser = async (data: string[]) => {
     const [username, password] = data;

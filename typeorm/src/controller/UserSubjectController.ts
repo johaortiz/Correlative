@@ -35,7 +35,7 @@ export class UserSubjectController {
 
         const updates = _request.body; // Array of objects with `tableId`, `approved`, and `regularized` properties
 
-        const promises = updates.map(({ tableId, approved, regularized }) =>
+        const promises = updates.data.map(({ tableId, approved, regularized }) =>
             this.userSubjectRepository.update(tableId, { approved, regularized })
         );
         await Promise.all(promises);

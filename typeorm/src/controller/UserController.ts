@@ -101,6 +101,7 @@ export class UserController {
                 id,
                 username: userDataBase,
                 careerId: career.id,
+                careerName: career.name,
                 isActive
             }, TOKEN_KEY);
             return { token: token };

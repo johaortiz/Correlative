@@ -1,7 +1,7 @@
 import FormAcess from "../../components/FormAcces";
 import { getCareers, saveUser } from "../../helpers/requests";
 import ComboBox from 'react-responsive-combo-box';
-// import 'react-responsive-combo-box/dist/index.css';
+import 'react-responsive-combo-box/dist/index.css';
 import { useEffect, useState } from "react";
 
 
@@ -53,7 +53,7 @@ const Register = () => {
             <label className="label">
                 <span className="label-text">Carrera que cursa</span>
             </label>
-            <ComboBox options={options} enableAutocomplete style={{ height: "3rem", fontSize: "1rem", flexShrink: 1, lineHeight: "1.5rem", borderWidth: "1px" }} placeholder="carrera" />
+            <ComboBox options={options} enableAutocomplete style={{ height: "3rem", minWidth: "20rem", fontSize: "1rem", flexShrink: 1, lineHeight: "1.5rem", borderWidth: "1px" }} placeholder="carrera" />
         </div>
     };
     const { title, subTitle, btnText, formControl, functionForm, aditional } = register;
