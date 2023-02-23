@@ -5,9 +5,9 @@ import { Career } from '../entity/Career';
 import { genSalt, hash, compare } from "bcrypt";;
 import { sign } from "jsonwebtoken";
 import { sendEmail } from "../config/mailer";
-import { config } from "dotenv";
+require("dotenv").config();
 
-const { TOKEN_KEY } = config().parsed;
+const { TOKEN_KEY } = process.env;
 export class UserController {
 
     private userRepository = AppDataSource.getRepository(User);
