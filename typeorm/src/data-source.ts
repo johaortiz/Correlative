@@ -5,19 +5,19 @@ import { Career } from "./entity/Career";
 import { Subject } from "./entity/Subject";
 import { config } from "dotenv";
 import { UserSubject } from "./entity/UserSubject";
-const { DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_PORT, DATABASE_NAME } = config().parsed;
+const env = config().parsed;
 
-console.log(DATABASE_NAME, DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_PORT);
+console.log(env);
 
 
 
 export const AppDataSource = new DataSource({
     type: "postgres",
-    host: DATABASE_HOST,
-    port: parseInt(DATABASE_PORT),
-    username: DATABASE_USER,
-    password: DATABASE_PASSWORD,
-    database: DATABASE_NAME,
+    host: env.DATABASE_HOST,
+    port: parseInt(env.DATABASE_PORT),
+    username: env.DATABASE_USER,
+    password: env.DATABASE_PASSWORD,
+    database: env.DATABASE_NAME,
     synchronize: true,
     logging: false,
     entities: [User, Career, Subject, UserSubject],
