@@ -5,7 +5,7 @@ import { Career } from "./entity/Career";
 import { Subject } from "./entity/Subject";
 import { config } from "dotenv";
 import { UserSubject } from "./entity/UserSubject";
-const { DATABASE_NAME, DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_PORT } = config().parsed;
+const { DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_PORT, DATABASE_NAME } = config().parsed;
 
 console.log(DATABASE_NAME, DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_PORT);
 
