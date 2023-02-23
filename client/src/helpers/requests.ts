@@ -1,4 +1,5 @@
 import axios from "axios";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 //Register User
 export const saveUser = async (data: string[]) => {
@@ -11,7 +12,7 @@ export const saveUser = async (data: string[]) => {
         return "Las contraseñas no coinciden"
     };
     try {
-        const response = await axios.post('http://localhost:3000/users/save', {
+        const response = await axios.post(`${BASE_URL}/users/save`, {
             email,
             username,
             password,
@@ -27,7 +28,7 @@ export const saveUser = async (data: string[]) => {
 //Get all subjects whit id of Career
 export const subjectsWhitIdCareer = async (id: number) => {
     try {
-        const response = await axios.get(`http://localhost:3000/careers/findId/${id}`);
+        const response = await axios.get(`${BASE_URL}/careers/findId/${id}`);
         return response.data.subjects;
     } catch (error: any) {
         return (error.response.data.message);
@@ -37,7 +38,7 @@ export const subjectsWhitIdCareer = async (id: number) => {
 //Get relation of subjects and user
 export const userSubject = async (id: number) => {
     try {
-        const response = await axios.post(`http://localhost:3000/usersubject`, { userId: id });
+        const response = await axios.post(`${BASE_URL}/usersubject`, { userId: id });
         return response.data;
     } catch (error: any) {
         return (error.response.data.message);
@@ -47,7 +48,7 @@ export const userSubject = async (id: number) => {
 //Update user_subject relation
 export const updateDbUserSubject = async (data: any) => {
     try {
-        const response = await axios.post(`http://localhost:3000/usersubject/update`, { data });
+        const response = await axios.post(`${BASE_URL}/usersubject/update`, { data });
         return response.data;
     } catch (error: any) {
         return (error.response.data.message);
@@ -61,7 +62,7 @@ export const loginUser = async (data: string[]) => {
         return "Por favor rellene todos los campos"
     };
     try {
-        const response = await axios.post("http://localhost:3000/users/login", {
+        const response = await axios.post(`${BASE_URL}/users/login`, {
             username,
             password
         });
@@ -73,6 +74,6 @@ export const loginUser = async (data: string[]) => {
 
 //Get all Carreers
 export const getCareers = async () => {
-    const response = await axios.get("http://localhost:3000/careers")
+    const response = await axios.get(`${BASE_URL}/careers`)
     return response.data;
 };
