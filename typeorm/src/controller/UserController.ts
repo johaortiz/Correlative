@@ -57,10 +57,18 @@ export class UserController {
             relations: ["subjects"]
         });
 
+        console.log(findUser);
+        console.log(!findUser);
+
+
         if (findUser) {
             throw new Error("User alredy exist");
         };
-        if (career) {
+
+        console.log(career);
+        console.log(!career);
+
+        if (!career) {
             throw new Error(`La carrera ${carrerName} no existe`);
         }
         const subjects = career.subjects.map((subject) => {
