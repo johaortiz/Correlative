@@ -23,12 +23,12 @@ export const sendEmail = async (email: string, hashedEmail: string) => {
             to: email,
             subject: "Confirmá tu Cuenta",
             html: `<h3>Bienvenido a UCP Correlativas</h3>
-                <p>¡Muchas gracias por registrate!</p>
+                <p>¡Muchas gracias por registrarte!</p>
                 <p>Por favor, confirme su correo electrónico para poder empezar a utilizar la plataforma</p>
-                <a href="${BASE_URL}/users/validate?account=${hashedEmail}">Haz click aquí para confirmar!</a>
-                <p>Reuerda que UCP Correlativas <strong>no</strong> es un sitio oficial ni autorizado por la Universidad Cuenca del Plata y que 
-                este sitio está hecha por un estudiante (yo) para usarlo él mismo y lo comparte con los demás alumnos</p>
-                <p>Saludos!</p>
+                <a href="${BASE_URL}/users/validate?account=${hashedEmail}">¡Haz click aquí para confirmar!</a>
+                <p>Recuerda que UCP Correlativas <strong>no</strong> es un sitio oficial ni autorizado por la Universidad Cuenca del Plata y que 
+                este sitio está hecho por un estudiante para usarlo por él mismo y lo comparte con los demás alumnos</p>
+                <p>¡Saludos!</p>
                 `
         });
         return "All Ok";
