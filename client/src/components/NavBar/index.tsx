@@ -11,7 +11,7 @@ const account: any = decodeToken(token);
 
 const NavBar = () => {
     return (
-        <div className="bg-base-200">
+        <div className="bg-transparent">
             <div className="navbar bg-teal-600 rounded-b-3xl">
                 <div className="navbar-start">
                     <div className="flex-1">

@@ -41,7 +41,7 @@ const Home = () => {
 
 
     return (
-        <motion.div className="bg-base-200 flex justify-center items-center mt-10" initial={{ width: 0 }} animate={{ width: "100vw" }} exit={{ width: window.innerWidth, transition: { duration: 0.1 } }}>
+        <motion.div className="bg-transparent flex justify-center items-center mt-10" initial={{ width: 0 }} animate={{ width: "100vw" }} exit={{ width: window.innerWidth, transition: { duration: 0.1 } }}>
             {/* <SideBar /> */}
             {
                 account ? <HomeWT subjects={subjects} userSubjects={userSubjects} careerName={account.careerName} /> : <HomeWOT />

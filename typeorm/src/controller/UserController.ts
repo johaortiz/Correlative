@@ -57,16 +57,9 @@ export class UserController {
             relations: ["subjects"]
         });
 
-        console.log(findUser);
-        console.log(!findUser);
-
-
         if (findUser) {
-            throw new Error("User alredy exist");
+            throw new Error("Usuario ya existente");
         };
-
-        console.log(career);
-        console.log(!career);
 
         if (!career) {
             throw new Error(`La carrera ${carrerName} no existe`);
@@ -123,10 +116,10 @@ export class UserController {
 
         let userToRemove = await this.userRepository.findOneBy({ id });
         if (!userToRemove) {
-            return "this user not exist";
+            return "Esteusuario no Existe";
         };
         await this.userRepository.remove(userToRemove);
-        return "user has been removed";
+        return "Usuario borrado Correctamente";
     };
 
     //Validate mail of user
@@ -137,9 +130,9 @@ export class UserController {
             where: { hashedEmail: account }
         });
         if (!user) {
-            throw new Error("User not Found");
+            throw new Error("Usuario no Encontrado");
         };
         await this.userRepository.update({ hashedEmail: account }, { isActive: true });
-        return "User successfully activated";
+        return "Usuario Activado Correctamente";
     };
 };

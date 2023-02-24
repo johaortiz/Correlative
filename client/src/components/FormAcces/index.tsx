@@ -16,11 +16,15 @@ const FormAcess = (props: { title: string, subTitle: string, btnText: string, fo
 
     //Values
     const ref = useRef<any>(null);
-    const [error, setError] = useState("");
+    const [error, setError] = useState<any>("");
+    const correctAcces = "Acceso Correcto";
+    const correctRegister = "Usuario creado correctamente! Por favor, revise su correo";
 
     //Send data
     const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+        setIsChecked(true);
         event.preventDefault();
+        setError("");
         //ALL values
         const valuesRef = Object.values(ref.current.elements).map((e: any) => {
             return (e.value);
@@ -28,30 +32,32 @@ const FormAcess = (props: { title: string, subTitle: string, btnText: string, fo
         const a = await props.functionForm(valuesRef);
         //Login part
         if (a.token) {
-            Cookies.set('token', a.token, { expires: .5, sameSite: "strict" });
-            return window.location.replace("/");
+            Cookies.set('token', a.token, { expires: .5, sameSite: "Strict", secure: false });
+            setError(correctAcces);
+            setTimeout(() => window.location.replace("/"), 5000);
+            return;
         };
         //Errors Controller
         setError(a);
-        setTimeout(() => setError(""), 7000);
         //Register part
-        if (a === "Usuario creado correctamente! Por favor, revise su correo(Si no lo encuentra, busque en correo no deseado)") {
-            return ref.current.reset();
-
+        if (a === correctRegister) {
+            setTimeout(() => window.location.replace("/acceso"), 5000);
+            return;
         };
     };
 
+    const [isChecked, setIsChecked] = useState(false);
+
+    const handleKeyDown = (event: any) => {
+        if (event.keyCode === 13) {
+            setIsChecked(!isChecked);
+        }
+    };
+
+
     return (
         <motion.div initial={{ width: 0 }} animate={{ width: "100vw" }} exit={{ width: window.innerWidth, transition: { duration: 0.1 } }}>
-            <div className={`alert shadow-lg mt-5 z-10 absolute ${error === "Usuario creado correctamente! Por favor, revise su correo" ? "alert-success" : "alert-error"} ${!error && "hidden"}`}>
-                <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>{error}</span>
-                </div>
-            </div>
-            <form ref={ref} onSubmit={onSubmit} className="hero bg-base-200 mt-20">
+            <form ref={ref} onSubmit={onSubmit} className="hero bg-transparent mt-20">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="text-center lg:text-right">
                         <h1 className="text-5xl font-bold">{props.title}</h1>
@@ -69,7 +75,22 @@ const FormAcess = (props: { title: string, subTitle: string, btnText: string, fo
                                 props.aditional
                             }
                             <div className="form-control mt-6">
-                                <button className="btn btn-primary">{props.btnText}</button>
+                                <button className="">
+                                    <label htmlFor="my-modal-20000" className={`btn btn-primary btn-block`}>{props.btnText}</label>
+                                </button>
+                                <input checked={isChecked} onKeyDown={handleKeyDown} onChange={() => setIsChecked(!isChecked)} type="checkbox" id="my-modal-20000"
+                                    className={`modal-toggle ${(error === correctRegister || error === correctAcces) ? "cursor-wait" : ""}`} />
+                                <label className={`modal modal-bottom sm:modal-middle ${(error === correctRegister || error === correctAcces) ? "cursor-wait" : ""}`}
+                                    htmlFor={(error === correctRegister || error === correctAcces) ? "" : "my-modal-20000"}>
+                                    <label className={`modal-box ${(error === correctRegister || error === correctAcces) ? "cursor-wait" : ""}`}>
+                                        {
+                                            (error === correctRegister || error === correctAcces) ? null : <label htmlFor="my-modal-20000" className="btn btn-sm btn-circle absolute right-3 top-3">X</label>
+                                        }
+                                        <h3 className="font-bold text-lg">{(error === correctRegister || error === correctAcces) ? "Todo salío parece haber salido bien" : "Error o..."}</h3>
+                                        <p className="text-base pt-2">{error}</p>
+                                        <p className="py-4">{(error === correctRegister || error === correctAcces) ? "Espere aquí mientras lo redireccionamos" : ""}</p>
+                                    </label>
+                                </label>
                             </div>
                         </div>
                     </div>

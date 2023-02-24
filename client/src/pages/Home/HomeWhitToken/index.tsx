@@ -181,7 +181,7 @@ const HomeWT = (props: { subjects: any, userSubjects: any, careerName: string })
                                 });
 
                                 return (
-                                    <tr key={i} className={`${dataSubjects.id % 2 === 0 ? "active" : ""} text-center`}>
+                                    <tr key={i} className={`${i % 2 === 0 ? "active" : ""} text-center`}>
                                         <th>
                                             <button className={`btn btn-circle btn-xs btn-disabled ${getCorrelativesColor(correlativesStatus)}`}></button>
                                         </th>

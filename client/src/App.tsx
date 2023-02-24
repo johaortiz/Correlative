@@ -10,6 +10,7 @@ const Register = lazy(() => import('./pages/Register'));
 const Profile = lazy(() => import('./pages/Profile'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const Denied = lazy(() => import('./pages/Denied'));
+const Exit = lazy(() => import('./pages/Exit'));
 
 
 const App = () => {
@@ -36,7 +37,7 @@ const App = () => {
             <Route path="/registro" element={<Suspense fallback={<>loading</>}><Register /></Suspense>} />
           </Route>
           <Route path="/denegado" element={<Suspense fallback={<>loading</>}><Denied /></Suspense>} />
-          <Route path="/salir" element={<Suspense fallback={<>loading</>}><NotFound /></Suspense>} />
+          <Route path="/salir" element={<Suspense fallback={<>loading</>}><Exit /></Suspense>} />
           <Route path="*" element={<Suspense fallback={<>loading</>}><NotFound /></Suspense>} />
         </Routes>
       </AnimatePresence>

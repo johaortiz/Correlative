@@ -19,8 +19,10 @@ export class CareerController {
         });
 
         if (!career) {
-            return ("Career not found");
+            return "Career not found";
         };
+
+        career.subjects.sort((a, b) => a.order - b.order);
         return career;
     };
 
@@ -34,6 +36,7 @@ export class CareerController {
         if (!career) {
             return ("Career not found");
         };
+        career.subjects.sort((a, b) => a.order - b.order);
         return career;
     };
 

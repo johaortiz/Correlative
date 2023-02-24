@@ -42,7 +42,7 @@ export class SubjectController {
     };
 
     async save(_request: Request, _response: Response, _next: NextFunction) {
-        const { idFromUniversity, name, semester, org, correlatives, careerId } = _request.body;
+        const { idFromUniversity, name, semester, org, correlatives, careerId, order } = _request.body;
 
         const careerSelected = await this.careerRepository.findOne({
             where: { id: careerId },
@@ -55,7 +55,8 @@ export class SubjectController {
             semester,
             org,
             correlatives,
-            career: careerSelected
+            career: careerSelected,
+            order
         });
 
         await this.subjectRepository.save(subjectDb);

@@ -23,6 +23,9 @@ export class Subject {
     @Column("int", { array: true, default: [] })
     correlatives: number[];
 
+    @Column()
+    order: number;
+
     @ManyToOne(type => Career, career => career.subjects)
     career: Career;
 

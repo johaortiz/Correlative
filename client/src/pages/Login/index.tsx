@@ -28,6 +28,7 @@ const Login = () => {
         },
         aditional: <label className="label">
             <Link to="#" className="label-text-alt link link-hover">¿Olvidó su contraseña? Recupérela</Link>
+            <Link to="/registro" className="label-text-alt link link-hover">¿No tiene cuenta?</Link>
         </label>
     };
     const { forgot, title, subTitle, btnText, formControl, functionForm, aditional } = login;

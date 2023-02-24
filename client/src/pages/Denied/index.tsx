@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import bg from "../../assets/images/notFound.jpg";
+import bg from "../../assets/images/denied.jpg";
 
 const Denied = () => {
     return (
