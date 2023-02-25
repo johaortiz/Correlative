@@ -20,6 +20,7 @@ const Careers = () => {
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         const response = await saveCareer(data.name, data.semesters);
+        console.log(response);
         setData({ name: "", semesters: "" });
     };
 
