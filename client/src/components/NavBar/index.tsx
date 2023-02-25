@@ -3,7 +3,7 @@ import { decodeToken } from "react-jwt";
 import { Link } from "react-router-dom";
 import ucp from "../../assets/images/ucp.png";
 import profile from "../../assets/svg/navbar/profile.svg";
-import Clock from "../Clock";
+// import Clock from "../Clock";
 import Logout from "../Logout";
 
 const token: string = Cookies.get("token") || "";
@@ -39,7 +39,8 @@ const NavBar = () => {
                                         <span className="badge">Nuevo</span>
                                     </Link>
                                 </li>
-                                <li><Link to="/ajustes">Ajustes</Link></li>
+                                <li><Link to="/tablas">Tablas</Link></li>
+                                <li><Link to="/anadir">Añadir</Link></li>
                                 <li><Logout /></li>
                             </> : <>
                                 <li><Link to="/acceso">Iniciar Sesión</Link></li>

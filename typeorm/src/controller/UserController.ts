@@ -7,7 +7,7 @@ import { sign } from "jsonwebtoken";
 import { sendEmail } from "../config/mailer";
 require("dotenv").config();
 
-const { TOKEN_KEY } = process.env;
+const { TOKEN_KEY, ADMIN_USERNAME } = process.env;
 export class UserController {
 
     private userRepository = AppDataSource.getRepository(User);
@@ -15,7 +15,27 @@ export class UserController {
 
     //Get All Users
     async all(_request: Request, _response: Response, _next: NextFunction) {
-        return this.userRepository.find({ relations: ["career"] });
+        const { username } = _request.body;
+
+        if (username !== ADMIN_USERNAME) {
+            return "Este usuario no tiene permisos para acceder a estos datos";
+        };
+
+        const findUser = await this.userRepository.find({ relations: ["career"] });
+        try {
+            const filteredUsers = findUser.map(({ id, username, isActive, isDisabled, career }) => ({
+                id,
+                username,
+                isActive,
+                isDisabled,
+                career: career.name
+            })).sort((a, b) => a.id - b.id);
+
+            return filteredUsers;
+        } catch (error) {
+            throw new Error("Algo salió mal")
+        }
+        return
     };
 
     //Get User By Id
@@ -75,8 +95,8 @@ export class UserController {
                 career,
                 subjects
             });
-            this.userRepository.save(user);
             await sendEmail(email, hashedEmail);
+            await this.userRepository.save(user);
             return "Usuario creado correctamente! Por favor, revise su correo";
         } catch (error) {
             throw new Error(error);
@@ -95,7 +115,7 @@ export class UserController {
             throw new Error("Usuario no Encontrado");
         };
         const passwordCheck: boolean = await compare(password, user.hashedPassword);
-        const { id, username: userDataBase, career, isActive } = user;
+        const { id, username: userDataBase, career, isActive, isDisabled } = user;
 
         if (passwordCheck) {
             const token = sign({
@@ -103,7 +123,8 @@ export class UserController {
                 username: userDataBase,
                 careerId: career.id,
                 careerName: career.name,
-                isActive
+                isActive,
+                isDisabled
             }, TOKEN_KEY);
             return { token: token };
         };

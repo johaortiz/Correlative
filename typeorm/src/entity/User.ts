@@ -20,6 +20,9 @@ export class User {
     @Column({ default: false })
     isActive: boolean;
 
+    @Column({ default: false })
+    isDisabled: boolean;
+
     @ManyToOne(type => Career, career => career.users)
     career: Career;
 

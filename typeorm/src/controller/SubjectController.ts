@@ -3,7 +3,9 @@ import { NextFunction, Request, Response } from "express";
 import { Subject } from "../entity/Subject";
 import { Career } from '../entity/Career';
 import { UserSubject } from '../entity/UserSubject';
+require("dotenv").config();
 
+const { ADMIN_USERNAME } = process.env;
 
 export class SubjectController {
 
@@ -12,7 +14,24 @@ export class SubjectController {
     private userSubjectRepository = AppDataSource.getRepository(UserSubject);
 
     async all(_request: Request, _response: Response, _next: NextFunction) {
-        return this.subjectRepository.find({ relations: ["career"] });
+
+        const { username } = _request.body;
+        if (username !== ADMIN_USERNAME) {
+            return "Este usuario no tiene permisos para acceder a estos datos";
+        };
+
+        const findedSubjects = await this.subjectRepository.find({ relations: ["career"] });
+        try {
+            const filterefSubjects = findedSubjects.sort((a, b) => a.id - b.id).map(item => {
+                return {
+                    ...item,
+                    career: item.career.name
+                };
+            });
+            return filterefSubjects;
+        } catch (error) {
+            throw new Error("Algo salió mal");
+        };
     };
 
     async oneById(_request: Request, _response: Response, _next: NextFunction) {

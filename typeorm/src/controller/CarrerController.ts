@@ -7,7 +7,10 @@ export class CareerController {
 
     async all(_request: Request, _response: Response, _next: NextFunction) {
 
-        return this.careerRepository.find();
+        const carrers = await this.careerRepository.find();
+        carrers.sort((a, b) => a.id - b.id);
+
+        return carrers;
     };
 
     async oneById(_request: Request, _response: Response, _next: NextFunction) {
@@ -19,7 +22,7 @@ export class CareerController {
         });
 
         if (!career) {
-            return "Career not found";
+            return "Carrera no Encontrada";
         };
 
         career.subjects.sort((a, b) => a.order - b.order);
@@ -34,7 +37,7 @@ export class CareerController {
         });
 
         if (!career) {
-            return ("Career not found");
+            return ("Carrera no Encontrada");
         };
         career.subjects.sort((a, b) => a.order - b.order);
         return career;
@@ -42,11 +45,15 @@ export class CareerController {
 
     async save(_request: Request, _response: Response, _next: NextFunction) {
         const { name, semesters } = _request.body;
-        const career = Object.assign(new Career(), {
-            name,
-            semesters
-        });
-        return this.careerRepository.save(career);
+        try {
+            const career = Object.assign(new Career(), {
+                name,
+                semesters
+            });
+            await this.careerRepository.save(career);
+            return "Carrera Añadida Correctamente";
+        } catch (error) {
+            throw new Error(error);
+        };
     };
-
 };

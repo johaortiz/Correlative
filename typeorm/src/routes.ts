@@ -6,7 +6,7 @@ import { UserSubjectController } from "./controller/UserSubjectController";
 export const Routes = [
     //User's Routes
     {
-        method: "get",
+        method: "post",
         route: "/users",
         controller: UserController,
         action: "all"
@@ -67,16 +67,10 @@ export const Routes = [
         controller: CareerController,
         action: "save"
     },
-    {
-        method: "delete",
-        route: "/careers/:id",
-        controller: CareerController,
-        action: "remove"
-    },
 
     //Subject's Routes
     {
-        method: "get",
+        method: "post",
         route: "/subjects",
         controller: SubjectController,
         action: "all"
@@ -96,12 +90,6 @@ export const Routes = [
         route: "/subjects/save",
         controller: SubjectController,
         action: "save"
-    },
-    {
-        method: "delete",
-        route: "/subjects/:id",
-        controller: SubjectController,
-        action: "remove"
     },
 
     //Table UserSubjects Route

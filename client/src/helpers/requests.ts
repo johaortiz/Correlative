@@ -1,6 +1,6 @@
 import axios from "axios";
-const BASE_URL = import.meta.env.VITE_BASE_URL;
-// const BASE_URL = "http://localhost:3001";
+// const BASE_URL = import.meta.env.VITE_BASE_URL;
+const BASE_URL = "http://localhost:3001";
 
 //Register User
 export const saveUser = async (data: string[]) => {
@@ -75,6 +75,41 @@ export const loginUser = async (data: string[]) => {
 
 //Get all Carreers
 export const getCareers = async () => {
-    const response = await axios.get(`${BASE_URL}/careers`)
-    return response.data;
+    try {
+        const response = await axios.get(`${BASE_URL}/careers`)
+        return response.data;
+    } catch (error: any) {
+        return (error.response.data.message);
+    }
+};
+
+
+//Get all Users 
+export const getUsers = async (username: string) => {
+    try {
+        const response = await axios.post(`${BASE_URL}/users`, { username });
+        return response.data;
+    } catch (error: any) {
+        return (error.response.data.message);
+    }
+};
+
+//Get all subjects
+export const getSubjects = async (username: string) => {
+    try {
+        const response = await axios.post(`${BASE_URL}/subjects`, { username });
+        return response.data;
+    } catch (error: any) {
+        return (error.response.data.message);
+    }
+};
+
+//Save a Career
+export const saveCareer = async (name: string, semesters: string) => {
+    try {
+        const response = await axios.post(`${BASE_URL}/careers/save`, { name, semesters: parseInt(semesters) });
+        return response.data;
+    } catch (error: any) {
+        return (error.response.data.message);
+    }
 };
