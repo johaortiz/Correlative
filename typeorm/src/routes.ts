@@ -1,108 +1,89 @@
-import { CareerController } from "./controller/CarrerController";
-import { SubjectController } from "./controller/SubjectController";
-import { UserController } from "./controller/UserController";
-import { UserSubjectController } from "./controller/UserSubjectController";
+import { CareerController } from "./controller/Career.controller";
+import { CoursetController } from "./controller/Course.controller";
+import { StudentController } from "./controller/Student.controller";
+import { StudyPlanController } from "./controller/StudyPlan.controller";
 
 export const Routes = [
-    //User's Routes
-    {
-        method: "post",
-        route: "/users",
-        controller: UserController,
-        action: "all"
-    }, {
-        method: "get",
-        route: "/users/findId/:id",
-        controller: UserController,
-        action: "oneById"
-    }, {
-        method: "get",
-        route: "/users/findName/:username",
-        controller: UserController,
-        action: "oneByName"
-    },
-    {
-        method: "post",
-        route: "/users/save",
-        controller: UserController,
-        action: "save"
-    }, {
-        method: "get",
-        route: "/users/validate",
-        controller: UserController,
-        action: "validate"
-    }, {
-        method: "post",
-        route: "/users/login",
-        controller: UserController,
-        action: "login"
-    },
-    {
-        method: "delete",
-        route: "/users/:id",
-        controller: UserController,
-        action: "remove"
-    },
-
-    //Career's Routes
-    {
-        method: "get",
-        route: "/careers",
-        controller: CareerController,
-        action: "all"
-    }, {
-        method: "get",
-        route: "/careers/findId/:id",
-        controller: CareerController,
-        action: "oneById"
-    }, {
-        method: "get",
-        route: "/careers/findName/:username",
-        controller: CareerController,
-        action: "oneByName"
-    },
-    {
-        method: "post",
-        route: "/careers/save",
-        controller: CareerController,
-        action: "save"
-    },
-
-    //Subject's Routes
-    {
-        method: "post",
-        route: "/subjects",
-        controller: SubjectController,
-        action: "all"
-    }, {
-        method: "get",
-        route: "/subjects/findId/:id",
-        controller: SubjectController,
-        action: "oneById"
-    }, {
-        method: "get",
-        route: "/subjects/findName/:username",
-        controller: SubjectController,
-        action: "oneByName"
-    },
-    {
-        method: "post",
-        route: "/subjects/save",
-        controller: SubjectController,
-        action: "save"
-    },
-
-    //Table UserSubjects Route
-    {
-        method: "post",
-        route: "/usersubject",
-        controller: UserSubjectController,
-        action: "subjectsFromStudent"
-    }, {
-        method: "post",
-        route: "/usersubject/update",
-        controller: UserSubjectController,
-        action: "update"
-    },
-
+  //Career Routes
+  {
+    method: "get",
+    route: "/careers",
+    controller: CareerController,
+    action: "all",
+  },
+  {
+    method: "post",
+    route: "/careers/save",
+    controller: CareerController,
+    action: "save",
+  },
+  //StudyPlan Routes
+  {
+    method: "get",
+    route: "/studyplans",
+    controller: StudyPlanController,
+    action: "all",
+  },
+  {
+    method: "post",
+    route: "/studyplans/save",
+    controller: StudyPlanController,
+    action: "save",
+  },
+  {
+    method: "post",
+    route: "/studyplans/assignsptc",
+    controller: StudyPlanController,
+    action: "assignStudyPlanToCareer",
+  },
+  //Student Routes
+  {
+    method: "get",
+    route: "/students",
+    controller: StudentController,
+    action: "all",
+  },
+  {
+    method: "get",
+    route: "/students/findById/:studentId",
+    controller: StudentController,
+    action: "oneById",
+  },
+  {
+    method: "post",
+    route: "/students/save",
+    controller: StudentController,
+    action: "save",
+  },
+  {
+    method: "post",
+    route: "/students/assignstsp",
+    controller: StudentController,
+    action: "assignUserToStudyPlan",
+  },
+  //Course Routes
+  {
+    method: "get",
+    route: "/courses",
+    controller: CoursetController,
+    action: "all",
+  },
+  {
+    method: "post",
+    route: "/courses/save",
+    controller: CoursetController,
+    action: "save",
+  },
+  {
+    method: "post",
+    route: "/courses/assignctsp",
+    controller: CoursetController,
+    action: "assignCourseToStudyPlan",
+  },
+  {
+    method: "post",
+    route: "/courses/assigncorrelations",
+    controller: CoursetController,
+    action: "assignCorrelations",
+  },
 ];
