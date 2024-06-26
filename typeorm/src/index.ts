@@ -23,6 +23,10 @@ AppDataSource.initialize().then(async () => {
         res.status(err.statusCode || 500).json({ error: err.message });
     };
 
+    app.get("/", (req: Request, res: Response) => {
+        res.send("Hola Mundo");
+    });
+
     Routes.forEach(route => {
         app[route.method](route.route, async (req: Request, res: Response, next: NextFunction) => {
             try {

@@ -8,8 +8,8 @@ import { IntStudyPlanStudent } from "./entity/IntStudyPlanStudent.entity";
 import { IntStudyPlanCourse } from "./entity/IntStudyPlanCourse.entity";
 import { IntCorrelation } from "./entity/IntCorrelation.entity";
 import { IntStudentStatus } from "./entity/IntStudentStatus.entity";
-
 require("dotenv").config();
+
 const {
   DATABASE_NAME,
   DATABASE_USER,
@@ -21,12 +21,15 @@ const {
 export const AppDataSource = new DataSource({
   type: "postgres",
   host: DATABASE_HOST,
-  port: parseInt(DATABASE_PORT),
+  port: parseInt(DATABASE_PORT, 10),
   username: DATABASE_USER,
   password: DATABASE_PASSWORD,
   database: DATABASE_NAME,
   synchronize: true,
   logging: false,
+  ssl: {
+    rejectUnauthorized: false, // Esto desactiva la verificación del certificado SSL. No es recomendado para producción.
+  },
   entities: [
     Career,
     Student,
